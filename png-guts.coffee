@@ -1,4 +1,3 @@
-
 {EventEmitter} = require 'events'
 {readData} = require 'tafa-misc-util'
 
@@ -54,11 +53,6 @@ uint32be = (n) ->
   ]
 
 
+module.exports = {main, ChunkReader, PNG_FILE_HEADER}
 if not module.parent
   main()
-
-module.exports =
-  main: main
-  ChunkReader: ChunkReader
-  PNG_FILE_HEADER: PNG_FILE_HEADER
-
