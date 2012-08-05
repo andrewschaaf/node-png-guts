@@ -5,7 +5,7 @@
 
 Options:
 
-    --strip-test            strip {iTXt,tEXt,zTXt} chunks
+    --strip-text            strip {iTXt,tEXt,zTXt} chunks
     --strip-ancillary       strip all chunks other than {IHDR,PLTE,IDAT,IEND}
 
 
