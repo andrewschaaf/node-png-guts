@@ -2,7 +2,7 @@ fs = require 'fs'
 {exec} = require 'child_process'
 assert = require 'assert'
 async = require 'async'
-{PNGChunkReader} = require '../png-guts'
+{PNGChunkReader, BIN_PATH} = require '../png-guts'
 
 
 main = () ->
@@ -21,10 +21,9 @@ test_stripping = (name, type, c) ->
   tmp = "#{__dirname}/temp"
   exec "mkdir -p '#{tmp}'", (e) ->
     return c e if e
-    bin = "#{__dirname}/../bin/png-guts"
     src = "#{__dirname}/pngs/#{name}.png"
     dest = "#{tmp}/#{name}-strip-#{type}.png"
-    exec "cat '#{src}' | '#{bin}' --strip-#{type} > '#{dest}'", (e) ->
+    exec "cat '#{src}' | '#{BIN_PATH}' --strip-#{type} > '#{dest}'", (e) ->
       return c e if e
       result_hex = fs.readFileSync(dest).toString 'hex'
       expected_hex = fs.readFileSync("#{__dirname}/pngs/#{name}-strip-#{type}.png").toString 'hex'

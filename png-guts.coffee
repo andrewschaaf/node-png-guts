@@ -1,7 +1,7 @@
 {EventEmitter} = require 'events'
 {readData} = require 'tafa-misc-util'
 
-
+BIN_PATH = "#{__dirname}/bin/png-guts"
 PNG_FILE_HEADER = new Buffer [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]
 
 
@@ -58,6 +58,6 @@ uint32be = (n) ->
   ]
 
 
-module.exports = {main, PNGChunkReader, PNG_FILE_HEADER}
+module.exports = {BIN_PATH, main, PNGChunkReader, PNG_FILE_HEADER}
 if not module.parent
   main()
