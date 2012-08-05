@@ -34,6 +34,7 @@ class ChunkReader extends EventEmitter
         raw = data.slice pos, (pos + totalChunkSize)
         @emit 'chunk', type, raw
         pos += totalChunkSize
+      @emit 'end'
 
 
 read_uint32be = (buf, pos) ->
