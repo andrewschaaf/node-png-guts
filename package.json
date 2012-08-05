@@ -1,6 +1,6 @@
 {
   "name": "png-guts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Helpers for working for working with PNG internals",
   "url": "https://github.com/andrewschaaf/node-png-guts",
   "main": "index.js",
