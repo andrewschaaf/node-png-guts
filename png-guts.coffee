@@ -16,13 +16,13 @@ main = () ->
       ignoreBlocks[k] = true
   
   process.stdout.write PNG_FILE_HEADER
-  reader = new ChunkReader process.openStdin()
+  reader = new PNGChunkReader process.openStdin()
   reader.on 'chunk', (type, raw) ->
     if not ignoreBlocks[type]
       process.stdout.write raw
 
 
-class ChunkReader extends EventEmitter
+class PNGChunkReader extends EventEmitter
   constructor: (stream) ->
     super()
     readData stream, (data) =>
@@ -54,6 +54,6 @@ uint32be = (n) ->
   ]
 
 
-module.exports = {main, ChunkReader, PNG_FILE_HEADER}
+module.exports = {main, PNGChunkReader, PNG_FILE_HEADER}
 if not module.parent
   main()

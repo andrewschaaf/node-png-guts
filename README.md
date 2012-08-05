@@ -6,11 +6,11 @@
 
 ## NodeJS library example
 
-    {PNG_FILE_HEADER, ChunkReader} = require 'png-guts'
+    {PNG_FILE_HEADER, PNGChunkReader} = require 'png-guts'
 
     inspect_png = (readable_stream) ->
       size = PNG_FILE_HEADER.length
-      reader = new ChunkReader readable_stream
+      reader = new PNGChunkReader readable_stream
       reader.on 'chunk', (type, data) ->
         console.log "#{type} chunk: #{data.length} bytes"
         size += data.length
