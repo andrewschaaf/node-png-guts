@@ -9,17 +9,21 @@ main = () ->
   
   argv = require('optimist').argv
   
-  # --strip-text
-  ignoreBlocks = {}
-  if argv['strip-text']
-    for k in ['iTXt', 'tEXt', 'zTXt']
-      ignoreBlocks[k] = true
+  typeWhitelist = null
+  typeBlacklist = {}
+  
+  if argv['strip-text']?
+    typeBlacklist = {'iTXt', 'tEXt', 'zTXt'}
+  
+  if argv['strip-ancillary']?
+    typeWhitelist = {'IHDR', 'PLTE', 'IDAT', 'IEND'}
   
   process.stdout.write PNG_FILE_HEADER
   reader = new PNGChunkReader process.openStdin()
   reader.on 'chunk', (type, raw) ->
-    if not ignoreBlocks[type]
-      process.stdout.write raw
+    return if typeWhitelist and not (typeWhitelist[type]?)
+    return if typeBlacklist[type]?
+    process.stdout.write raw
 
 
 class PNGChunkReader extends EventEmitter
