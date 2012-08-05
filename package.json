@@ -16,5 +16,8 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/andrewschaaf/node-png-guts.git"
+  },
+  "devDependencies": {
+    "async": "~0.1.22"
   }
 }
