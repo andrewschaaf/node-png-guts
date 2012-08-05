@@ -1,7 +1,7 @@
 {
   "name": "png-guts",
-  "version": "0.0.1",
-  "description": "Helpers for working for working with PNG internals, `png-guts --strip-text`",
+  "version": "0.0.2",
+  "description": "Helpers for working for working with PNG internals",
   "url": "https://github.com/andrewschaaf/node-png-guts",
   "main": "index.js",
   "bin": {
