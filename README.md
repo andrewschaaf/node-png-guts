@@ -1,15 +1,18 @@
 
-## CLI
+## Command-line tool
 
     cat foo.png | png-guts --strip-text > foo-normalized.png
 
 
-## Library
+## NodeJS library example
 
     {PNG_FILE_HEADER, ChunkReader} = require 'png-guts'
 
-    process.stdout.write PNG_FILE_HEADER
-    reader = new ChunkReader process.openStdin()
-    reader.on 'chunk', (type, raw) ->
-      process.stderr.write "#{type} #{raw.length}\n"
-      process.stdout.write raw
+    inspect_png = (readable_stream) ->
+      size = PNG_FILE_HEADER.length
+      reader = new ChunkReader readable_stream
+      reader.on 'chunk', (type, data) ->
+        console.log "#{type} chunk: #{data.length} bytes"
+        size += data.length
+      reader.on 'end', () ->
+        console.log "file size: #{size.length} bytes"
