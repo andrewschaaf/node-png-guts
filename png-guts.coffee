@@ -32,30 +32,13 @@ class PNGChunkReader extends EventEmitter
     readData stream, (data) =>
       pos = 8
       while pos < data.length
-        size = read_uint32be data, pos
+        size = data.readUInt32BE pos
         totalChunkSize = 4 + 4 + size + 4
         type = data.slice(pos + 4, pos + 8).toString('utf-8')
         raw = data.slice pos, (pos + totalChunkSize)
         @emit 'chunk', type, raw
         pos += totalChunkSize
       @emit 'end'
-
-
-read_uint32be = (buf, pos) ->
-  (
-    (buf[pos + 0] << 24) +
-    (buf[pos + 1] << 16) +
-    (buf[pos + 2] << 8) +
-    (buf[pos + 3]))
-
-
-uint32be = (n) ->
-  new Buffer [
-    (n >> 24) % 256,
-    (n >> 16) % 256,
-    (n >> 8) % 256,
-    (n) % 256
-  ]
 
 
 module.exports = {BIN_PATH, main, PNGChunkReader, PNG_FILE_HEADER}
