@@ -18,7 +18,8 @@ main = () ->
     typeWhitelist = {'IHDR', 'PLTE', 'IDAT', 'IEND'}
   
   process.stdout.write PNG_FILE_HEADER
-  reader = new PNGChunkReader process.openStdin()
+  process.stdin.resume()
+  reader = new PNGChunkReader process.stdin
   reader.on 'chunk', (type, raw) ->
     return if typeWhitelist and not (typeWhitelist[type]?)
     return if typeBlacklist[type]?
