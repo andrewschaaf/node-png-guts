@@ -1,5 +1,4 @@
 {EventEmitter} = require 'events'
-{readData} = require 'tafa-misc-util'
 
 BIN_PATH = "#{__dirname}/bin/png-guts"
 PNG_FILE_HEADER = new Buffer [0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A]
@@ -29,7 +28,7 @@ main = () ->
 class PNGChunkReader extends EventEmitter
   constructor: (stream) ->
     super()
-    readData stream, (data) =>
+    read_data stream, (data) =>
       pos = 8
       while pos < data.length
         size = data.readUInt32BE pos
@@ -39,6 +38,14 @@ class PNGChunkReader extends EventEmitter
         @emit 'chunk', type, raw
         pos += totalChunkSize
       @emit 'end'
+
+
+read_data = (stream, callback) ->
+  arr = []
+  stream.on 'data', (data) ->
+    arr.push data
+  stream.on 'end', () ->
+    callback Buffer.concat arr
 
 
 module.exports = {BIN_PATH, main, PNGChunkReader, PNG_FILE_HEADER}
