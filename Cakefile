@@ -1,3 +1,3 @@
 
 task 'test', () ->
-  require('test/tests').main()
+  require('./tests/tests').main()
